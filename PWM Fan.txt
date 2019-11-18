@@ -1,0 +1,29 @@
+  How to use our PWM Cooling Fan:
+
+Step1: Open Terminal
+Step2: sudo sh -c 'echo 120 > /sys/devices/pwm-fan/target_pwm'  
+
+
+
+How to set up automatically cooling fan running at boot:
+
+
+Step1: Creat and Edit rc.local
+sudo vi /etc/rc.local
+
+Step2: Add these to the rc.local file
+#!/bin/bash
+sleep 10
+sudo /usr/bin/jetson_clocks
+sudo sh -c 'echo 120 > /sys/devices/pwm-fan/target_pwm'
+
+Step3: Save and Quit
+Click Esc, and enter :wq! , enter
+
+Step4: Add permission to rc.local
+sudo chmod u+x rc.local
+
+Step5: Reboot your Jetson Nano
+
+Notice: the number 255 in the file is the speed of this pwm fan, the speed range is 0~255 , you can set every number in this range, 255 is the fastest, 0 is stop .
+
